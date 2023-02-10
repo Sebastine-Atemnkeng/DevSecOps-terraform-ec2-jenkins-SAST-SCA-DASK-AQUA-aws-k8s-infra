@@ -1,1 +1,1 @@
-# DevSecOps-terraform-ec2-jenkins-SAST-SCA-DASK-AQUA-aws-k8s-infra
+# DevSecOps-terraform-ec2-jenkins-SAST-AQUA-SCA-DAST-AWS-EKS-infra
