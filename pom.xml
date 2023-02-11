@@ -8,6 +8,7 @@
 	<version>1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<easybuggy-port>8080</easybuggy-port>
@@ -171,8 +172,29 @@
    <configuration>
       <format>ALL</format>
   
-
-
+<!--# Changes for Software Composition Analysis Scan using Snyk
+#By sebastine
+-->
+	  <modules>
+		<module>server</module>
+		<module>webapp</module>
+	  </modules>
+	
+	  <distributionManagement>
+		<site>
+		  <id>site-server</id>
+		  <name>Test Project Site</name>
+		  <url>file:///tmp/maven-project-site</url>
+		</site>
+		<snapshotRepository>
+				<id>nexus</id>
+				<url>http://172.31.10.0:8081/repository/maven-snapshots/</url>
+			</snapshotRepository>
+			<repository>
+				<id>nexus</id>
+				<url>http://172.31.10.0:8081/repository/maven-releases/</url>
+			</repository>
+	  </distributionManagement>
 
 
    </configuration>
