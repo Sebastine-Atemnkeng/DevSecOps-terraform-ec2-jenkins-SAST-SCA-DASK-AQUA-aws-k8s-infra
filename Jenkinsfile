@@ -32,7 +32,7 @@
     stage('SAST SCANNING. @SONAR/QUALITY-GATES') {
           
 		environment {
-            scannerHome = tool 'sonarscanner4'
+            scannerHome = tool 'sonar'
         }
 
         steps {
