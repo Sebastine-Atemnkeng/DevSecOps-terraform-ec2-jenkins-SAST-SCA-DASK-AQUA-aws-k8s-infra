@@ -3,15 +3,15 @@
     tools {
         maven 'maven_3.5.2'
     }
-    environment {
-        NEXUS_VERSION = "nexus3"
-        NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "172.31.40.209:8081"
-        NEXUS_REPOSITORY = "vprofile-release"
-	NEXUS_REPO_ID    = "vprofile-release"
-        NEXUS_CREDENTIAL_ID = "nexuslogin"
-        ARTVERSION = "${env.BUILD_ID}"
-    }
+    // environment {
+    //     NEXUS_VERSION = "nexus3"
+    //     NEXUS_PROTOCOL = "http"
+    //     NEXUS_URL = "172.31.40.209:8081"
+    //     NEXUS_REPOSITORY = "vprofile-release"
+	// NEXUS_REPO_ID    = "vprofile-release"
+    //     NEXUS_CREDENTIAL_ID = "nexuslogin"
+    //     ARTVERSION = "${env.BUILD_ID}"
+    // }
     stages{
 
     stage('UNIT TEST'){
@@ -36,15 +36,10 @@
         }
 
         steps {
-            withSonarQubeEnv('sonar') {
-               sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=easybuggy \
-                   -Dsonar.projectName=easybuggy \
-                   -Dsonar.projectVersion=1.0 \
-                   -Dsonar.sources=src/ \
-                   -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
-                   -Dsonar.junit.reportsPath=target/surefire-reports/ \
-                   -Dsonar.jacoco.reportsPath=target/jacoco.exec \
-                   -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
+           mvn sonar:sonar \
+	    -Dsonar.projectKey=easybuggy \
+            -Dsonar.host.url=http://54.226.168.88:9000 \
+            -Dsonar.login=38df27852cfca6f019cba5094b1e34fb3c6ae3d4
             }
 
             timeout(time: 10, unit: 'MINUTES') {
