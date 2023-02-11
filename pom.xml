@@ -8,7 +8,6 @@
 	<version>1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<easybuggy-port>8080</easybuggy-port>
@@ -128,7 +127,6 @@
 			<version>1.5.1</version>
 		</dependency>
 	</dependencies>
-
 	
 	<build>
 		<plugins>
@@ -143,28 +141,9 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>3.2.2</version>
-			  </plugin>
-			  <plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-		   <version>0.8.4</version>
-			   <executions>
-				   <execution>
-					   <id>jacoco-initialize</id>
-					   <phase>process-resources</phase>
-					   <goals>
-						   <goal>prepare-agent</goal>
-					   </goals>
-				   </execution>
-				   <execution>
-					   <id>jacoco-site</id>
-					   <phase>post-integration-test</phase>
-					   <goals>
-						   <goal>report</goal>
-					   </goals>
-				<configuration>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>1.1.1</version>
+				<executions>
 					<execution>
 						<id>enforce-java</id>
 						<goals>
@@ -183,41 +162,18 @@
 							</rules>
 						</configuration>
 					</execution>
-				</configuration>
-				   </execution>
-			   </executions>
+				</executions>
 			</plugin>
 			<plugin>
-
    <groupId>org.owasp</groupId>
    <artifactId>dependency-check-maven</artifactId>
    <version>6.1.6</version>
    <configuration>
       <format>ALL</format>
   
-<!--# Changes for nexus
-#By sebastine
--->
-	  <modules>
-		<module>server</module>
-		<module>webapp</module>
-	  </modules>
-	
-	  <distributionManagement>
-		<site>
-		  <id>site-server</id>
-		  <name>Test Project Site</name>
-		  <url>file:///tmp/maven-project-site</url>
-		</site>
-		<snapshotRepository>
-				<id>nexus</id>
-				<url>http://172.31.10.0:8081/repository/maven-snapshots/</url>
-			</snapshotRepository>
-			<repository>
-				<id>nexus</id>
-				<url>http://172.31.10.0:8081/repository/maven-releases/</url>
-			</repository>
-	  </distributionManagement>
+
+
+
 
    </configuration>
 </plugin>
@@ -303,7 +259,16 @@
 								<argument>-XX:+HeapDumpOnOutOfMemoryError</argument>
 								<argument>-XX:HeapDumpPath=logs/</argument>
 								<argument>-XX:ErrorFile=logs/hs_err_pid%p.log</argument>
-								
+								<!-- <argument>-XX:NativeMemoryTracking=summary</argument> -->
+								<!-- Auto kill JVM when OOME occurs: For post-8u92 JDKs -->
+								<!-- <argument>-XX:+CrashOnOutOfMemoryError</argument> -->
+								<!-- Auto kill JVM when OOME occurs: For Linux -->
+								<!-- <argument>-XX:OnOutOfMemoryError="kill -9 %p"</argument> -->
+								<!-- Auto kill JVM when OOME occurs: For Windows -->
+								<!-- -XX:OnOutOfMemoryError=taskkill /F /PID %p -->
+								<!-- UnlockCommercialFeatures/FlightRecorder: For Oracle Java commercial use -->
+								<!-- <argument>-XX:+UnlockCommercialFeatures</argument> <argument>-XX:+FlightRecorder</argument> -->
+								<!-- <argument>-agentpath:/root/eclipse/plugins/org.zeroturnaround.eclipse.embedder_7.0.8.RELEASE/jrebel/lib/libjrebel64.so</argument> -->
 								<argument>-agentlib:jdwp=transport=dt_socket,server=y,address=9009,suspend=n</argument>
 								<argument>-Dderby.stream.error.file=logs/derby.log</argument>
 								<argument>-Dderby.infolog.append=true</argument>
@@ -315,7 +280,9 @@
 								<argument>-Dcom.sun.management.jmxremote.port=7900</argument>
 								<argument>-Dcom.sun.management.jmxremote.ssl=false</argument>
 								<argument>-Dcom.sun.management.jmxremote.authenticate=false</argument>
-								
+								<!-- <argument>-Djava.security.manager</argument>
+								<argument>-Djava.security.policy=catalina.policy</argument> -->
+								<!-- <argument>-Deasybuggy.mode=only-vulnerabilities</argument> -->
 								<argument>-ea</argument>
 								<argument>-jar</argument>
 								<argument>target/easybuggy.jar</argument>
@@ -338,6 +305,7 @@
 		<version>2.3.2</version>
   		</plugin>
 
+
     <plugin>
       <groupId>io.snyk</groupId>
       <artifactId>snyk-maven-plugin</artifactId>
@@ -347,7 +315,6 @@
         <org>asecurityguru</org>
       </configuration>
     </plugin>
-	
 <!-- Snyk Changes for SCA Ends Here -->
 		</plugins>
 		<pluginManagement>
