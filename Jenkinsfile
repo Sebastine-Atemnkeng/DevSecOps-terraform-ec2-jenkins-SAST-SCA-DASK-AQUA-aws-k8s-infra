@@ -30,7 +30,13 @@
         }
     }
     stage('SAST SCANNING. @SONAR/QUALITY-GATES') {
-	steps {
+          
+		environment {
+            scannerHome = tool 'sonar'
+        }
+
+        steps {
+            withSonarQubeEnv('sonar') {
           sh """ mvn sonar:sonar \
 	    	-Dsonar.projectKey=easybuggy \
             	-Dsonar.host.url=http://54.226.168.88:9000 \
@@ -41,6 +47,7 @@
                waitForQualityGate abortPipeline: true
             }
         }
+    }
     stage('SCA SCANNING. @SNYK.. ') {
         steps {		
 			withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
