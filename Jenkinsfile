@@ -30,21 +30,20 @@
         }
     }
     stage('SAST SCANNING. @SONAR/QUALITY-GATES') {
-          
-		environment {
-            scannerHome = tool 'sonar'
-        }
-
         steps {
-            withSonarQubeEnv('sonar') {
           sh """ mvn sonar:sonar \
-	    	-Dsonar.projectKey=easybuggy \
+	    	    -Dsonar.projectKey=easybuggy \
             	-Dsonar.host.url=http://54.226.168.88:9000 \
             	-Dsonar.login=38df27852cfca6f019cba5094b1e34fb3c6ae3d4"""
             }
-
-            timeout(time: 10, unit: 'MINUTES') {
-               waitForQualityGate abortPipeline: true
+        }
+    }
+    stage("Quality Gate") {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+                    // true = set pipeline to UNSTABLE, false = don't
+                    waitForQualityGate abortPipeline: true
             }
         }
     }
