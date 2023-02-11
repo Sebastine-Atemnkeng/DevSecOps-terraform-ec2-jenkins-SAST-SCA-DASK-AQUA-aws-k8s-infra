@@ -1,3 +1,33 @@
+
+Skip to content
+Pull requests
+Issues
+Codespaces
+Marketplace
+Explore
+@sebastine01
+asecurityguru /
+devsecops-jenkins-k8s-tf-sast-sca-dast-sonarcloud-snyk-zap-e2e-repo
+Public
+
+Fork your own copy of asecurityguru/devsecops-jenkins-k8s-tf-sast-sca-dast-sonarcloud-snyk-zap-e2e-repo
+
+Code
+Issues
+Pull requests
+Actions
+Projects
+Security
+
+    Insights
+
+devsecops-jenkins-k8s-tf-sast-sca-dast-sonarcloud-snyk-zap-e2e-repo/pom.xml
+@asecurityguru
+asecurityguru Added Docker Build and Push Changes to Jenkinsfile
+Latest commit 420639d Sep 6, 2022
+History
+1 contributor
+351 lines (344 sloc) 12.2 KB
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -7,7 +37,6 @@
 	<artifactId>easybuggy</artifactId>
 	<version>1-SNAPSHOT</version>
 	<packaging>war</packaging>
-
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -171,32 +200,21 @@
    <version>6.1.6</version>
    <configuration>
       <format>ALL</format>
-  
-<!--# Changes for Software Composition Analysis Scan using Snyk
-#By sebastine
--->
-	  <modules>
-		<module>server</module>
-		<module>webapp</module>
-	  </modules>
-	
-	  <distributionManagement>
-		<site>
-		  <id>site-server</id>
-		  <name>Test Project Site</name>
-		  <url>file:///tmp/maven-project-site</url>
-		</site>
-		<snapshotRepository>
-				<id>nexus</id>
-				<url>http://172.31.10.0:8081/repository/maven-snapshots/</url>
-			</snapshotRepository>
-			<repository>
-				<id>nexus</id>
-				<url>http://172.31.10.0:8081/repository/maven-releases/</url>
-			</repository>
-	  </distributionManagement>
-
-
+      <!--    <failBuildOnCVSS>8</failBuildOnCVSS>
+   
+   
+			      use internal mirroring of CVE contents 
+			      Suppress files 
+			      E.g. a company-wide suppression file and local project file 
+			     -->
+      <!-- 
+			     <cveUrlModified>http://internal-mirror.mycorp.com/nvdcve-1.1-modified.json.gz</cveUrlModified>  
+			                    <cveUrlBase>http://internal-mirror.mycorp.com/nvdcve-1.1-%d.json.gz</cveUrlBase>
+			     <suppressionFiles>               
+			                        <suppressionFile>http://example.org/suppression.xml</suppressionFile>
+			                        <suppressionFile>project-suppression.xml</suppressionFile> 
+			                    </suppressionFiles> 
+			                 -->
    </configuration>
 </plugin>
 			<plugin>
@@ -315,19 +333,8 @@
 				</executions>
 			</plugin>
 			<!--# Changes for Software Composition Analysis Scan using Snyk
-#By sebastine
+#By ASecurityGuru
 -->
-	<plugin>
-		<artifactId>maven-checkstyle-plugin</artifactId>
-		<version>2.8</version>
- 		</plugin>
-
-  	<plugin>
-		<artifactId>maven-compiler-plugin</artifactId>
-		<version>2.3.2</version>
-  		</plugin>
-
-
     <plugin>
       <groupId>io.snyk</groupId>
       <artifactId>snyk-maven-plugin</artifactId>
@@ -372,3 +379,19 @@
 		</pluginManagement>
 	</build>
 </project>
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
+
+    Terms
+    Privacy
+    Security
+    Status
+    Docs
+    Contact GitHub
+    Pricing
+    API
+    Training
+    Blog
+    About
+
