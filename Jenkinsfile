@@ -37,7 +37,6 @@
             	-Dsonar.login=38df27852cfca6f019cba5094b1e34fb3c6ae3d4"""
             }
         }
-    }
     stage("Quality Gate") {
             steps {
                 timeout(time: 1, unit: 'HOURS') {
@@ -154,5 +153,6 @@
             }
         }
     }
- }
+  }
+}
 
