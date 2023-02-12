@@ -8,6 +8,8 @@
 	<version>1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
+    <url>http://maven.apache.org</url>
+
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -317,32 +319,30 @@
 			<!-- CODE COVERAGE 
 #By Sebastine
 -->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-war-plugin</artifactId>
-						<version>3.2.2</version>
-					   </plugin>
-				<plugin>
-					<groupId>org.jacoco</groupId>
-					<artifactId>jacoco-maven-plugin</artifactId>
-			   <version>0.8.4</version>
-					<executions>
-						<execution>
-							<id>jacoco-initialize</id>
-							<phase>process-resources</phase>
-							<goals>
-								<goal>prepare-agent</goal>
-							</goals>
-						</execution>
-						<execution>
-							<id>jacoco-site</id>
-							<phase>post-integration-test</phase>
-							<goals>
-								<goal>report</goal>
-							</goals>
-						</execution>
-					</executions>
-			</plugin>
+    <plugin>
+      <groupId>org.jacoco</groupId>
+     <artifactId>jacoco-maven-plugin</artifactId>
+      <version>0.8.7</version>
+      <executions>
+        <execution>
+          <id>prepare-agent</id>
+          <goals>
+            <goal>prepare-agent</goal>
+          </goals>
+        </execution>
+        <execution>
+          <id>report</id>
+          <goals>
+            <goal>report</goal>
+          </goals>
+          <configuration>
+            <formats>
+              <format>XML</format>
+            </formats>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
 			<!--# Changes for Software Composition Analysis Scan using Snyk
 #By sebastine
 -->
