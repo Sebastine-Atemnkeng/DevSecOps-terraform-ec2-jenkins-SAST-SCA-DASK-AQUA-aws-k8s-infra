@@ -36,7 +36,6 @@
 	    	-Dsonar.projectKey=easybuggy \
             	-Dsonar.host.url=http://10.0.0.12:9000 \
             	-Dsonar.login=12f7cda5b9fcb239b86afd6966b094ba83384feb
-		-Dsonar.projectName=easybuggy \
                 -Dsonar.projectVersion=1.0 \
                 -Dsonar.sources=src/ \
                 -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
