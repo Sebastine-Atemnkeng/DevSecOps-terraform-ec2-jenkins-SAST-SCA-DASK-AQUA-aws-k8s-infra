@@ -31,12 +31,14 @@
     }
     stage('SAST SCANNING. @SONAR/QUALITY-GATES') {
         steps {
-          sh """ mvn sonar:sonar \
-	    	    -Dsonar.projectKey=easybuggy \
+	   withSonarQubeEnv('sonar') {
+              sh """ mvn clean package sonar:sonar \
+	    	-Dsonar.projectKey=easybuggy \
             	-Dsonar.host.url=http://10.0.0.12:9000 \
             	-Dsonar.login=12f7cda5b9fcb239b86afd6966b094ba83384feb"""
             }
         }
+    }
     stage("Quality Gate") {
             steps {
                 timeout(time: 1, unit: 'HOURS') {
