@@ -23,18 +23,6 @@
 		<jvm.args.gc.log.file.rotation>-XX:+UseGCLogFileRotation</jvm.args.gc.log.file.rotation>
 		<jvm.args.number.of.gc.log.files>-XX:NumberOfGCLogFiles=5</jvm.args.number.of.gc.log.files>
 		<jvm.args.gc.log.file.size>-XX:GCLogFileSize=10M</jvm.args.gc.log.file.size>
-		<sonar.java.binaries>target/classes</sonar.java.binaries>
-		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
-		<sonar.jacoco.reportPath>target/jacoco.exec</sonar.jacoco.reportPath>
-		<sonar.language>kotlin</sonar.language>
-		<sonar.sources>src/main</sonar.sources>
-		<sonar.tests>src/test</sonar.tests>
-		<sonar.verbose>true</sonar.verbose>
-		<sonar.jacoco.reportsPath>target</sonar.jacoco.reportsPath>
-		<sonar.junit.reportsPath>target/surefire-reports</sonar.junit.reportsPath>
-		<sonar.surefire.reportsPath>target/surefire-reports</sonar.surefire.reportsPath>
-	
-		<surefireArgLine/>
 	</properties>
 
 	<profiles>
@@ -331,64 +319,30 @@
 			<!-- CODE COVERAGE 
 #By Sebastine
 -->
-
-<plugin>
-    <groupId>org.jacoco</groupId>
-    <artifactId>jacoco-maven-plugin</artifactId>
-    <version>0.8.1</version>
-    <configuration>
-        <append>true</append>
-    </configuration>
-    <executions>
+    <plugin>
+      <groupId>org.jacoco</groupId>
+     <artifactId>jacoco-maven-plugin</artifactId>
+      <version>0.8.7</version>
+      <executions>
         <execution>
-            <id>pre-unit-test</id>
-            <goals>
-                <goal>prepare-agent</goal>
-            </goals>
-            <configuration>
-                <destFile>target/jacoco.exec</destFile>
-                <propertyName>surefireArgLine</propertyName>
-            </configuration>
+          <id>prepare-agent</id>
+          <goals>
+            <goal>prepare-agent</goal>
+          </goals>
         </execution>
         <execution>
-            <id>post-unit-test</id>
-            <phase>test</phase>
-            <goals>
-                <goal>report</goal>
-            </goals>
+          <id>report</id>
+          <goals>
+            <goal>report</goal>
+          </goals>
+          <configuration>
+            <formats>
+              <format>XML</format>
+            </formats>
+          </configuration>
         </execution>
-    </executions>
-</plugin>
-
-<plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-surefire-plugin</artifactId>
-    <configuration>
-        <excludes>
-            <exclude>**/*IT.java</exclude>
-        </excludes>
-    </configuration>
-    <dependencies>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-surefire-provider</artifactId>
-            <version>1.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit-jupiter.version}</version>
-        </dependency>
-    </dependencies>
-</plugin>
-
-
-
-
-
-
-
-
+      </executions>
+    </plugin>
 			<!--# Changes for Software Composition Analysis Scan using Snyk
 #By sebastine
 -->
