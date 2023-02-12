@@ -23,6 +23,15 @@
 		<jvm.args.gc.log.file.rotation>-XX:+UseGCLogFileRotation</jvm.args.gc.log.file.rotation>
 		<jvm.args.number.of.gc.log.files>-XX:NumberOfGCLogFiles=5</jvm.args.number.of.gc.log.files>
 		<jvm.args.gc.log.file.size>-XX:GCLogFileSize=10M</jvm.args.gc.log.file.size>
+		<!-- Sonar configuration -->
+		<jacoco.report.ut>${project.build.directory}/jacoco-ut.exec</jacoco.report.ut>
+		<jacoco.report.it>${project.build.directory}/jacoco-it.exec</jacoco.report.it>
+	
+		<sonar.language>kotlin</sonar.language>
+		<sonar.sources>src/main/java</sonar.sources>
+		<sonar.tests>src/test/java</sonar.tests>
+		<sonar.junit.reportPaths>${project.build.directory}/surefire-reports</sonar.junit.reportPaths>
+		<sonar.jacoco.reportPaths>${jacoco.report.ut},${jacoco.report.it}</sonar.jacoco.reportPaths>
 	</properties>
 
 	<profiles>
@@ -319,30 +328,89 @@
 			<!-- CODE COVERAGE 
 #By Sebastine
 -->
-    <plugin>
-      <groupId>org.jacoco</groupId>
-     <artifactId>jacoco-maven-plugin</artifactId>
-      <version>0.8.7</version>
-      <executions>
+
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <configuration>
+        <argLine>${surefireArgLine}</argLine>
+        <excludes>
+            <exclude>**/*IT.java</exclude>
+        </excludes>
+    </configuration>
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-surefire-provider</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-jupiter.version}</version>
+        </dependency>
+    </dependencies>
+</plugin>
+
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-failsafe-plugin</artifactId>
+    <configuration>
+        <argLine>${failsafeArgLine}</argLine>
+        <includes>
+            <include>**/*IT.java</include>
+        </includes>
+    </configuration>
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-surefire-provider</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-jupiter.version}</version>
+        </dependency>
+    </dependencies>
+</plugin>
+
+<plugin>
+    <groupId>org.jacoco</groupId>
+    <artifactId>jacoco-maven-plugin</artifactId>
+    <version>0.8.1</version>
+    <executions>
         <execution>
-          <id>prepare-agent</id>
-          <goals>
-            <goal>prepare-agent</goal>
-          </goals>
+            <id>jacoco-agent-ut</id>
+            <goals>
+                <goal>prepare-agent</goal>
+            </goals>
+            <configuration>
+                <destFile>${jacoco.report.ut}</destFile>
+                <propertyName>surefireArgLine</propertyName>
+            </configuration>
         </execution>
         <execution>
-          <id>report</id>
-          <goals>
-            <goal>report</goal>
-          </goals>
-          <configuration>
-            <formats>
-              <format>XML</format>
-            </formats>
-          </configuration>
+            <id>jacoco-agent-it</id>
+            <goals>
+                <goal>prepare-agent-integration</goal>
+            </goals>
+            <configuration>
+                <destFile>${jacoco.report.it}</destFile>
+                <propertyName>failsafeArgLine</propertyName>
+            </configuration>
         </execution>
-      </executions>
-    </plugin>
+    </executions>
+</plugin>
+
+
+
+
+
+
+
+
+
 			<!--# Changes for Software Composition Analysis Scan using Snyk
 #By sebastine
 -->
