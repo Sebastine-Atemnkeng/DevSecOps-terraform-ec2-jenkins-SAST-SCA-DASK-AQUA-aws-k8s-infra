@@ -33,8 +33,8 @@
         steps {
           sh """ mvn sonar:sonar \
 	    	    -Dsonar.projectKey=easybuggy \
-            	-Dsonar.host.url=http://54.226.168.88:9000 \
-            	-Dsonar.login=38df27852cfca6f019cba5094b1e34fb3c6ae3d4"""
+            	-Dsonar.host.url=http://10.0.0.12:9000 \
+            	-Dsonar.login=12f7cda5b9fcb239b86afd6966b094ba83384feb"""
             }
         }
     stage("Quality Gate") {
