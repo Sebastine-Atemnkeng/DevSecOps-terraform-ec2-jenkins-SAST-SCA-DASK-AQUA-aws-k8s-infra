@@ -32,10 +32,14 @@
     stage('SAST SCANNING. @SONAR/QUALITY-GATES') {
         steps {
 	   withSonarQubeEnv('sonar') {
-              sh """ mvn clean package sonar:sonar \
+        sh """ mvn clean package sonar:sonar \
 	    	-Dsonar.projectKey=easybuggy \
-            	-Dsonar.host.url=http://10.0.0.12:9000 \
-            	-Dsonar.login=12f7cda5b9fcb239b86afd6966b094ba83384feb"""
+            -Dsonar.host.url=http://10.0.0.12:9000 \
+            -Dsonar.login=12f7cda5b9fcb239b86afd6966b094ba83384feb
+            -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
+            -Dsonar.junit.reportsPath=target/surefire-reports/ \
+            -Dsonar.jacoco.reportsPath=target/jacoco.exec \
+            -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml"""
             }
         }
     }
