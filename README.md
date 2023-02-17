@@ -1,7 +1,5 @@
 # DevSecOps-terraform-ec2-jenkins-SAST-AQUA-SCA-DAST-AWS-EKS-infra
 
-Download the code in in this repository "Main branch": https://github.com/sebastine01/DevSecOps-terraform-ec2-jenkins-SAST-SCA-DASK-AQUA-aws-k8s-infra/tree/devsecops-jenkins-k8s-tf-sast-sonarcloud
-
 Helpful Terraform Links:
 
     Terraform Language Documentation
@@ -26,6 +24,9 @@ Step 3: SSH to instance to get the admin password
 - ssh -i <keypair> ec2-user@<public_dns>
 - sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
+    
+Download the code in in this repository "Main branch": https://github.com/sebastine01/DevSecOps-terraform-ec2-jenkins-SAST-SCA-DASK-AQUA-aws-k8s-infra/tree/devsecops-jenkins-k8s-tf-sast-sonarcloud    
+      
 # Some useful Kubernetes commands:
 
 - $ cat /home/ec2-user/.kube/config  --> to get context information of kubernetes cluster.
