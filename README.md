@@ -5,7 +5,7 @@ Helpful Terraform Links:
     Terraform Language Documentation
     Resource: aws_security_group
     Resource: aws_instance
-    Download the code in in this repository "Main branch": [https://github.com/awanmbandi/eagles-batch-devops-projects.git](https://github.com/sebastine01/DevSecOps-terraform-ec2-jenkins-SAST-SCA-DASK-AQUA-aws-k8s-infra/blob/devsecops-jenkins-k8s-tf-sast-sonarcloud
+    Download the code in in this repository "Main branch": https://github.com/sebastine01/DevSecOps-terraform-ec2-jenkins-SAST-SCA-DASK-AQUA-aws-k8s-infra/tree/devsecops-jenkins-k8s-tf-sast-sonarcloud
 
 Step 0: Initialize Terraform
 
