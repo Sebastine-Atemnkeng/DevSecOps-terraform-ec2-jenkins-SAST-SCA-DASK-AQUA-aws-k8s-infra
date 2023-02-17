@@ -26,7 +26,7 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 # Some useful Kubernetes commands:
 
-$ cat /home/ec2-user/.kube/config  --> to get context information of kubernetes cluster.
+- $ cat /home/ec2-user/.kube/config  --> to get context information of kubernetes cluster.
 $ kubectl create namespace test --> to create namespace in kubernetes cluster.
 $ kubectl get deployments --namespace=devsecops --> to get deployments in a namespace in kubernetes cluster.
 $ kubectl get svc --namespace=devsecops --> to get services in a namespace in kubernetes cluster.
