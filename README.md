@@ -5,6 +5,7 @@ Helpful Terraform Links:
     Terraform Language Documentation
     Resource: aws_security_group
     Resource: aws_instance
+    Download the code in in this repository "Main branch": https://github.com/awanmbandi/eagles-batch-devops-projects.git
 
 Step 0: Initialize Terraform
 
